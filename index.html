@@ -71,7 +71,10 @@
   .brand:hover img{transform:rotate(14deg) scale(1.08);filter:drop-shadow(0 0 18px rgba(168,85,247,0.65));}
   @keyframes logoPulse{0%,100%{filter:drop-shadow(0 0 10px rgba(168,85,247,0.35));}50%{filter:drop-shadow(0 0 16px rgba(168,85,247,0.55));}}
   .brand span{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.02em;}
-  nav ul{display:flex;gap:36px;list-style:none;}
+  nav ul{display:flex;gap:36px;list-style:none;align-items:center;}
+  .nav-social{display:flex;gap:20px;align-items:center;margin-left:auto;border-left:1px solid var(--border);padding-left:36px;}
+  .nav-social a{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s ease, transform .2s ease;color:var(--text-muted);}
+  .nav-social a:hover{background:rgba(124,58,237,0.15);color:var(--purple-glow);transform:scale(1.1);}
   nav a{font-size:14px;color:var(--text-muted);transition:color .2s ease;position:relative;}
   nav a::after{
     content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;
@@ -110,8 +113,13 @@
   }
   .eyebrow::before{content:'';width:22px;height:1px;background:var(--purple-glow);}
   .hero h1{
-    font-size:clamp(38px,5.4vw,66px);
-    font-weight:600;line-height:1.08;margin-bottom:26px;animation-delay:.18s;
+    font-size:clamp(42px,5.8vw,72px);
+    font-weight:700;line-height:1.05;margin-bottom:16px;animation-delay:.18s;
+    letter-spacing:-0.01em;
+  }
+  .hero-tagline{
+    font-size:16px;color:var(--purple-glow);font-weight:500;margin-bottom:32px;animation-delay:.22s;
+    text-transform:uppercase;letter-spacing:0.12em;
   }
   .hero h1 .accent{
     background:linear-gradient(90deg,var(--purple-glow),#f0abfc,var(--purple-primary),var(--purple-glow));
@@ -196,10 +204,22 @@
     border:1px solid var(--border);
     border-radius:16px;
     overflow:hidden;
-    transition:transform .3s ease, border-color .3s ease, box-shadow .3s ease;
+    transition:transform .3s cubic-bezier(.22,1,.36,1), border-color .3s ease, box-shadow .3s ease;
     display:flex;flex-direction:column;
+    position:relative;
   }
-  .app-card:hover{transform:translateY(-6px);border-color:var(--border-bright);box-shadow:0 24px 50px -20px rgba(124,58,237,0.4);}
+  .app-card::before{
+    content:'';position:absolute;inset:0;
+    background:linear-gradient(135deg,rgba(168,85,247,0.08),transparent 60%);
+    opacity:0;transition:opacity .3s ease;pointer-events:none;z-index:1;
+  }
+  .app-card:hover{
+    transform:translateY(-8px);
+    border-color:var(--border-bright);
+    box-shadow:0 32px 60px -16px rgba(124,58,237,0.5);
+  }
+  .app-card:hover::before{opacity:1;}
+  .app-card > *{position:relative;z-index:2;}
 
   .card-bar{
     display:flex;align-items:center;gap:8px;
@@ -217,20 +237,26 @@
   }
 
   .card-visual{
-    height:150px;
+    height:160px;
     display:flex;align-items:center;justify-content:center;
     position:relative;
   }
-  .card-visual svg{width:56px;height:56px;position:relative;z-index:1;animation:iconFloat 3.6s ease-in-out infinite;}
+  .card-visual svg{
+    width:64px;height:64px;position:relative;z-index:1;
+    animation:iconFloat 3.6s ease-in-out infinite;
+    filter:drop-shadow(0 0 20px var(--glow,rgba(124,58,237,0.3)));
+    transition:filter .3s ease;
+  }
+  .app-card:hover .card-visual svg{filter:drop-shadow(0 0 30px var(--glow,rgba(124,58,237,0.6)));}
   .app-card:nth-child(2n) .card-visual svg{animation-delay:.5s;}
   .app-card:nth-child(3n) .card-visual svg{animation-delay:1s;}
-  @keyframes iconFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-8px) rotate(-3deg);}}
+  @keyframes iconFloat{0%,100%{transform:translateY(0) rotate(0deg);}50%{transform:translateY(-10px) rotate(-4deg);}}
   .card-visual::after{
     content:'';position:absolute;inset:0;
-    background:radial-gradient(circle at 50% 40%, var(--glow,rgba(124,58,237,0.35)), transparent 65%);
+    background:radial-gradient(circle at 50% 40%, var(--glow,rgba(124,58,237,0.4)), transparent 70%);
     animation:glowPulse 3.6s ease-in-out infinite;
   }
-  @keyframes glowPulse{0%,100%{opacity:.7;}50%{opacity:1;}}
+  @keyframes glowPulse{0%,100%{opacity:.8;}50%{opacity:1.1;}}
 
   .card-body{padding:22px 22px 26px;flex:1;display:flex;flex-direction:column;}
   .card-body .tag{
@@ -304,7 +330,19 @@
   @media (max-width:860px){
     .about-grid{grid-template-columns:1fr;}
     .contact-grid{grid-template-columns:1fr;}
-    nav ul{display:none;}
+    .program-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
+    nav ul{gap:20px;}
+    .nav-social{border-left:none;padding-left:0;}
+    .wrap{padding:0 20px;}
+  }
+  @media (max-width:640px){
+    header .wrap{flex-direction:column;gap:16px;}
+    nav ul{flex-wrap:wrap;gap:16px;justify-content:center;}
+    .nav-social{width:100%;justify-content:center;}
+    .hero-content{max-width:100%;}
+    .hero h1{font-size:clamp(32px,7vw,48px);}
+    .program-grid{grid-template-columns:1fr;}
+    footer .wrap{flex-direction:column;text-align:center;}
   }
   @media (prefers-reduced-motion: reduce){
     .orb, .circuit path{animation:none;}
@@ -326,6 +364,14 @@
         <li><a href="#hakkimizda">Hakkımızda</a></li>
         <li><a href="#programlar">Programlar</a></li>
         <li><a href="#iletisim">İletişim</a></li>
+        <li class="nav-social">
+          <a href="https://instagram.com/hzyazilim.official" target="_blank" rel="noopener" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+          </a>
+          <a href="mailto:hz.yazilimm@gmail.com" title="E-posta">
+            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><path d="M3 6l9 7 9-7M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6"/></svg>
+          </a>
+        </li>
       </ul>
     </nav>
   </div>
@@ -343,6 +389,7 @@
   </div>
   <div class="wrap hero-content">
     <span class="eyebrow hero-anim">HZ Yazılım · Bağımsız Yazılım Stüdyosu</span>
+    <div class="hero-tagline hero-anim">Bağımsız · Yaratıcı · Modern</div>
     <h1 class="hero-anim">Her uygulamanın arkasında<br>bir <span class="accent">mühendislik disiplini</span> var.</h1>
     <p class="hero-anim">Android ekosisteminde Kotlin ve Jetpack Compose ile üretilen, Firebase altyapısıyla güvenilir bir omurgaya oturtulmuş uygulamalar geliştiriyoruz. Küçük detaylara verdiğimiz önemin, kullanıcı deneyiminde büyük fark yarattığına inanıyoruz.</p>
     <div class="btn-row hero-anim">
