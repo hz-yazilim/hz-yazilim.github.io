@@ -264,7 +264,15 @@
     color:var(--purple-glow);text-transform:uppercase;margin-bottom:10px;
   }
   .card-body h3{font-size:20px;font-weight:600;margin-bottom:10px;}
-  .card-body p{font-size:14px;color:var(--text-muted);line-height:1.65;margin-bottom:22px;flex:1;}
+  .card-body p{font-size:14px;color:var(--text-muted);line-height:1.65;margin-bottom:16px;flex:1;}
+
+  .features{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px;}
+  .feature{
+    font-size:12px;padding:6px 12px;background:rgba(124,58,237,0.1);
+    border:1px solid rgba(124,58,237,0.2);border-radius:6px;
+    color:var(--text-muted);transition:all .2s ease;
+  }
+  .app-card:hover .feature{background:rgba(124,58,237,0.15);border-color:rgba(124,58,237,0.35);color:var(--text-primary);}
 
   .card-actions{display:flex;gap:10px;flex-wrap:wrap;}
   .card-actions a{
@@ -325,6 +333,9 @@
   footer{border-top:1px solid var(--border);padding:50px 0;}
   footer .wrap{display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:18px;}
   footer .brand span{font-size:14px;}
+  .footer-links{display:flex;gap:28px;}
+  .footer-links a{font-size:13.5px;color:var(--text-muted);transition:color .2s ease;text-decoration:none;}
+  .footer-links a:hover{color:var(--purple-glow);}
   footer .copy{font-size:12.5px;color:#5f5675;font-family:'JetBrains Mono',monospace;}
 
   @media (max-width:860px){
@@ -407,9 +418,10 @@
     </div>
     <div class="about-grid">
       <div class="about-text reveal">
-        <p><strong>HZ Yazılım</strong>, mobil dünya için özenle tasarlanmış uygulamalar üreten bağımsız bir yazılım stüdyosudur. İşimiz sadece kod yazmak değil; bir fikri, günlük hayatta gerçekten kullanılan, güvenilir bir ürüne dönüştürmek.</p>
-        <p>Her projede aynı prensiple ilerliyoruz: sağlam bir mimari, temiz bir kullanıcı deneyimi ve kullanıcı verisine gösterilen ciddi bir özen. Firebase tabanlı altyapılarımız, kimlik doğrulamadan veri senkronizasyonuna kadar her katmanda güvenliği önceliklendirir.</p>
-        <p>Küçük bir ekip olmanın avantajını kullanıyoruz: her uygulama, üzerinde çalışan kişinin imzasını taşıyor. Bu da bize hız yerine kaliteyi, trend yerine sürdürülebilirliği seçme özgürlüğü veriyor.</p>
+        <p><strong>HZ Yazılım</strong>, İstanbul'da bulunan, bağımsız bir yazılım geliştirici tarafından kurulan ve yönetilen bir stüdyodur. Mobil dünya için özenle tasarlanmış uygulamalar üreten, her detayı düşünen bir ekip (okse biri de çok ise) olarak hareket ediyoruz.</p>
+        <p>Biz yazılımı sadece kod yazmak olarak değil, bir <em>zanaat</em> olarak görüyoruz. Bir fikri, insanların günlük hayatta gerçekten kullandığı, güvenilir bir ürüne dönüştürmek bizim işimiz. Her proje başladığında, sadece fonksiyonellik değil — kullanıcının tüm deneyimi, her animasyon, her geçiş, her pixel göz önünde bulundurulur.</p>
+        <p><strong>Teknoloji seçimlerimiz bilinçli:</strong> Kotlin ve Jetpack Compose ile native Android geliştirme yapıyoruz çünkü performans ve kullanıcı deneyimi bizim önceliği. Firebase altyapısı sayesinde skalabilir, güvenli sistemler inşa edebiliyoruz. KVKK uyumlu veri işleme prensipleri bütün uygulamalarımızın temelini oluşturuyor.</p>
+        <p>Küçük bir ekip olmanın avantajını tamamen kullanıyoruz: her uygulama, geliştireticinin imzasını taşıyor. Bu da bize hız yerine <strong>kaliteyi</strong>, trend yerine <strong>sürdürülebilirliği</strong>, kısa vadeli kazanç yerine <strong>uzun vadeli değer</strong> seçme özgürlüğü veriyor.</p>
       </div>
       <div class="pillars reveal">
         <div class="pillar">
@@ -461,8 +473,14 @@
           <span class="tag">İlişki &amp; Yaşam</span>
           <h3>KalpKalp</h3>
           <p>Çiftler için anı biriktiren bir uygulama: birlikte geçen süreyi sayan Sevgi Ağacı, uyum testleri ve senkronize film izleme deneyimi bir arada.</p>
+          <div class="features">
+            <div class="feature">🌳 Sevgi Ağacı</div>
+            <div class="feature">🎬 HzCinema</div>
+            <div class="feature">💕 Uyum Testi</div>
+          </div>
           <div class="card-actions">
-            <a href="gizlilik-kalpkalp.html" target="_blank" rel="noopener">KVKK &amp; Gizlilik Politikası →</a>
+            <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.kalpkalp" target="_blank" rel="noopener">Google Play →</a>
+            <a href="gizlilik-kalpkalp.html" target="_blank" rel="noopener">Gizlilik →</a>
           </div>
         </div>
       </div>
@@ -480,8 +498,14 @@
           <span class="tag">Dini Yaşam</span>
           <h3>Zikir Matik</h3>
           <p>Sade ve dikkat dağıtmayan bir dijital tesbih. Titreşim geri bildirimi, hedef sayaç ve günlük zikir takibiyle tasarlandı.</p>
+          <div class="features">
+            <div class="feature">📿 Dijital Tesbih</div>
+            <div class="feature">🎯 Hedef Takibi</div>
+            <div class="feature">📊 İstatistik</div>
+          </div>
           <div class="card-actions">
-            <a href="gizlilik-zikirmatik.html" target="_blank" rel="noopener">KVKK &amp; Gizlilik Politikası →</a>
+            <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.zikirmatik" target="_blank" rel="noopener">Google Play →</a>
+            <a href="gizlilik-zikirmatik.html" target="_blank" rel="noopener">Gizlilik →</a>
           </div>
         </div>
       </div>
@@ -499,8 +523,14 @@
           <span class="tag">Eğlence &amp; Takip</span>
           <h3>Animelist</h3>
           <p>İzlenen animeleri takip etmenin ötesine geçen, XP ve HZ Coin ile ödüllendiren, günlük giriş serisi barındıran oyunlaştırılmış bir takip uygulaması.</p>
+          <div class="features">
+            <div class="feature">⚡ XP Sistemi</div>
+            <div class="feature">🪙 HZ Coins</div>
+            <div class="feature">🔥 Daily Streak</div>
+          </div>
           <div class="card-actions">
-            <a href="gizlilik-animelist.html" target="_blank" rel="noopener">KVKK &amp; Gizlilik Politikası →</a>
+            <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.animelist" target="_blank" rel="noopener">Google Play →</a>
+            <a href="gizlilik-animelist.html" target="_blank" rel="noopener">Gizlilik →</a>
           </div>
         </div>
       </div>
@@ -518,8 +548,14 @@
           <span class="tag">Yapay Zekâ</span>
           <h3>HZ Bot</h3>
           <p>Telefonun içinde yaşayan, kendi ekosistemine sahip bağımsız bir dijital arkadaş. Kendi kararlarını kendisi verebilen, klasik bir asistandan çok bir "yaşayan" yol arkadaşı olarak tasarlanıyor.</p>
+          <div class="features">
+            <div class="feature">🤖 Bağımsız AI</div>
+            <div class="feature">💭 Düşünceli Yanıtlar</div>
+            <div class="feature">🌱 Gelişen Kişilik</div>
+          </div>
           <div class="card-actions">
-            <a href="gizlilik-hzbot.html" target="_blank" rel="noopener">KVKK &amp; Gizlilik Politikası →</a>
+            <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.hzbot" target="_blank" rel="noopener">Google Play →</a>
+            <a href="gizlilik-hzbot.html" target="_blank" rel="noopener">Gizlilik →</a>
           </div>
         </div>
       </div>
@@ -537,8 +573,14 @@
           <span class="tag">Arayüz &amp; Kişiselleştirme</span>
           <h3>eLauncher</h3>
           <p>Telefon arayüzünü sadeleştiren, gösterişten uzak ve şık bir ana ekran deneyimi. Gereksiz her şeyi eleyip geriye sadece ihtiyacınız olanı bırakan bir launcher.</p>
+          <div class="features">
+            <div class="feature">✨ Minimal Tasarım</div>
+            <div class="feature">⚙️ Özelleştirilebilir</div>
+            <div class="feature">⚡ Hafif</div>
+          </div>
           <div class="card-actions">
-            <a href="gizlilik-elauncher.html" target="_blank" rel="noopener">KVKK &amp; Gizlilik Politikası →</a>
+            <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.elauncher" target="_blank" rel="noopener">Google Play →</a>
+            <a href="gizlilik-elauncher.html" target="_blank" rel="noopener">Gizlilik →</a>
           </div>
         </div>
       </div>
@@ -556,8 +598,14 @@
           <span class="tag">Arayüz &amp; Nostalji</span>
           <h3>Retro4S</h3>
           <p>iPhone 4S'in ikonik arayüz dilini alıp günümüz standartlarına taşıyan modern bir yeniden yorumlama. Nostaljik his, güncel performans.</p>
+          <div class="features">
+            <div class="feature">🕰️ Retro Tasarım</div>
+            <div class="feature">📱 Modern Altyapı</div>
+            <div class="feature">🎨 Nostalji</div>
+          </div>
           <div class="card-actions">
-            <a href="gizlilik-retro4s.html" target="_blank" rel="noopener">KVKK &amp; Gizlilik Politikası →</a>
+            <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.retro4s" target="_blank" rel="noopener">Google Play →</a>
+            <a href="gizlilik-retro4s.html" target="_blank" rel="noopener">Gizlilik →</a>
           </div>
         </div>
       </div>
@@ -630,6 +678,10 @@
     <div class="brand">
       <img src="logo.png" alt="HZ Yazılım logo" style="width:30px;height:30px;">
       <span>HZ YAZILIM</span>
+    </div>
+    <div class="footer-links">
+      <a href="https://instagram.com/hzyazilim.official" target="_blank" rel="noopener" title="Instagram">Instagram</a>
+      <a href="mailto:hz.yazilimm@gmail.com" title="E-posta">İletişim</a>
     </div>
     <div class="copy">© <span id="year"></span> HZ Yazılım — Tüm hakları saklıdır.</div>
   </div>
