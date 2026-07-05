@@ -75,6 +75,14 @@
   .nav-social{display:flex;gap:20px;align-items:center;margin-left:auto;border-left:1px solid var(--border);padding-left:36px;}
   .nav-social a{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s ease, transform .2s ease;color:var(--text-muted);}
   .nav-social a:hover{background:rgba(124,58,237,0.15);color:var(--purple-glow);transform:scale(1.1);}
+  .theme-toggle{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--border);cursor:pointer;transition:all .2s ease;background:transparent;color:var(--text-muted);}
+  .theme-toggle:hover{border-color:var(--border-bright);background:rgba(124,58,237,0.08);color:var(--purple-glow);}
+  body.light-mode{--bg-void:#f8f6ff;--bg-panel:#f0e8ff;--bg-panel-2:#e8deff;--text-primary:#1a0033;--text-muted:#6b5680;}
+  
+  .page-loader{position:fixed;inset:0;z-index:999;background:var(--bg-void);display:flex;align-items:center;justify-content:center;opacity:1;visibility:visible;transition:opacity .4s ease, visibility .4s ease;}
+  .page-loader.hidden{opacity:0;visibility:hidden;}
+  .loader-spinner{width:40px;height:40px;border:3px solid rgba(124,58,237,0.2);border-top-color:var(--purple-primary);border-radius:50%;animation:spin .8s linear infinite;}
+  @keyframes spin{to{transform:rotate(360deg);}}
   nav a{font-size:14px;color:var(--text-muted);transition:color .2s ease;position:relative;}
   nav a::after{
     content:'';position:absolute;left:0;bottom:-4px;width:0;height:1px;
@@ -338,7 +346,46 @@
   .footer-links a:hover{color:var(--purple-glow);}
   footer .copy{font-size:12.5px;color:#5f5675;font-family:'JetBrains Mono',monospace;}
 
-  @media (max-width:860px){
+  /* ---------- stats ---------- */
+  .stats{padding:100px 0;background:radial-gradient(600px 400px at 10% 100%, rgba(168,85,247,0.06), transparent 70%);}
+  .stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:32px;text-align:center;}
+  .stat-item{display:flex;flex-direction:column;align-items:center;gap:12px;}
+  .stat-number{font-size:clamp(36px,5vw,56px);font-weight:700;background:linear-gradient(135deg,var(--purple-primary),var(--purple-glow));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .stat-label{font-size:14px;color:var(--text-muted);font-family:'JetBrains Mono',monospace;letter-spacing:0.08em;}
+
+  /* ---------- blog ---------- */
+  .blog{padding:130px 0;border-top:1px solid var(--border);}
+  .blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:28px;margin-top:48px;}
+  .blog-card{
+    background:var(--bg-panel);border:1px solid var(--border);border-radius:12px;padding:28px;
+    transition:transform .3s ease, border-color .3s ease;display:flex;flex-direction:column;gap:14px;
+  }
+  .blog-card:hover{transform:translateY(-4px);border-color:var(--border-bright);}
+  .blog-date{font-size:12px;color:var(--purple-glow);font-weight:600;text-transform:uppercase;letter-spacing:0.1em;}
+  .blog-card h3{font-size:18px;font-weight:600;color:var(--text-primary);}
+  .blog-card p{font-size:14px;color:var(--text-muted);line-height:1.6;flex:1;}
+  .blog-link{font-size:13px;color:var(--purple-glow);font-weight:500;text-decoration:none;display:inline-flex;gap:4px;transition:gap .2s ease;}
+  .blog-link:hover{gap:8px;}
+
+  /* ---------- newsletter ---------- */
+  .newsletter{padding:100px 0;}
+  .newsletter-card{
+    background:linear-gradient(135deg,var(--bg-panel),var(--bg-panel-2));
+    border:1px solid var(--border-bright);border-radius:16px;padding:48px;text-align:center;
+    max-width:600px;margin:0 auto;
+  }
+  .newsletter-card h2{font-size:28px;margin-bottom:12px;color:var(--text-primary);}
+  .newsletter-card p{color:var(--text-muted);margin-bottom:24px;}
+  .newsletter-form{display:flex;gap:12px;margin-bottom:16px;flex-wrap:wrap;justify-content:center;}
+  .newsletter-form input{
+    flex:1;min-width:200px;padding:12px 16px;background:var(--bg-void);border:1px solid var(--border);
+    border-radius:8px;color:var(--text-primary);font-size:14px;transition:border-color .2s ease;
+  }
+  .newsletter-form input:focus{outline:none;border-color:var(--border-bright);}
+  .newsletter-form button{flex:0 0 auto;min-width:120px;}
+  .newsletter-card small{color:var(--text-muted);font-size:12px;}
+
+  /* ---------- responsive updates ---------- */
     .about-grid{grid-template-columns:1fr;}
     .contact-grid{grid-template-columns:1fr;}
     .program-grid{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));}
@@ -346,14 +393,29 @@
     .nav-social{border-left:none;padding-left:0;}
     .wrap{padding:0 20px;}
   }
+  @media (max-width:860px){
+    .about-grid{grid-template-columns:1fr;}
+    .contact-grid{grid-template-columns:1fr;}
+    .program-grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr));}
+    .stats-grid{grid-template-columns:repeat(2,1fr);}
+    .blog-grid{grid-template-columns:1fr;}
+    nav ul{gap:20px;}
+    .newsletter-card{padding:32px 20px;}
+    .wrap{padding:0 20px;}
+  }
   @media (max-width:640px){
-    header .wrap{flex-direction:column;gap:16px;}
-    nav ul{flex-wrap:wrap;gap:16px;justify-content:center;}
-    .nav-social{width:100%;justify-content:center;}
+    header .wrap{gap:12px;}
+    nav{width:100%;}
+    nav ul{flex-wrap:wrap;gap:14px;justify-content:center;width:100%;}
+    .nav-social{width:100%;justify-content:center;border-left:none;padding-left:0;border-top:1px solid var(--border);padding-top:12px;}
     .hero-content{max-width:100%;}
-    .hero h1{font-size:clamp(32px,7vw,48px);}
+    .hero h1{font-size:clamp(28px,6vw,42px);}
     .program-grid{grid-template-columns:1fr;}
+    .stats-grid{grid-template-columns:1fr;}
+    .newsletter-form{flex-direction:column;}
+    .newsletter-form button{width:100%;}
     footer .wrap{flex-direction:column;text-align:center;}
+    .section-head h2{font-size:clamp(24px,5vw,32px);}
   }
   @media (prefers-reduced-motion: reduce){
     .orb, .circuit path{animation:none;}
@@ -362,6 +424,9 @@
 </style>
 </head>
 <body>
+<div class="page-loader" id="pageLoader">
+  <div class="loader-spinner"></div>
+</div>
 <div class="scroll-progress" id="scrollProgress"></div>
 
 <header id="siteHeader">
@@ -374,16 +439,18 @@
       <ul>
         <li><a href="#hakkimizda">Hakkımızda</a></li>
         <li><a href="#programlar">Programlar</a></li>
+        <li><a href="#blog">Güncellemeler</a></li>
         <li><a href="#iletisim">İletişim</a></li>
-        <li class="nav-social">
-          <a href="https://instagram.com/hzyazilim.official" target="_blank" rel="noopener" title="Instagram">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
-          </a>
-          <a href="mailto:hz.yazilimm@gmail.com" title="E-posta">
-            <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><path d="M3 6l9 7 9-7M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6"/></svg>
-          </a>
-        </li>
       </ul>
+      <div class="nav-social">
+        <button class="theme-toggle" id="themeToggle" title="Tema değiştir">🌙</button>
+        <a href="https://instagram.com/hzyazilim.official" target="_blank" rel="noopener" title="Instagram">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor"/></svg>
+        </a>
+        <a href="mailto:hz.yazilimm@gmail.com" title="E-posta">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke="currentColor"><path d="M3 6l9 7 9-7M3 6v12a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6"/></svg>
+        </a>
+      </div>
     </nav>
   </div>
 </header>
@@ -621,6 +688,76 @@
   </div>
 </section>
 
+<section class="stats" id="istatistikler">
+  <div class="wrap">
+    <div class="stats-grid">
+      <div class="stat-item reveal">
+        <div class="stat-number" id="appCount">6</div>
+        <div class="stat-label">Yayınlanan Uygulama</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-number">250K+</div>
+        <div class="stat-label">Toplam İndirme</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-number">4.8⭐</div>
+        <div class="stat-label">Ortalama Puan</div>
+      </div>
+      <div class="stat-item reveal">
+        <div class="stat-number">∞</div>
+        <div class="stat-label">Yaratıcılık Enerjisi</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="blog" id="blog">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="section-eyebrow">Güncellemeler</span>
+      <h2>Neler yapıyorum?</h2>
+      <p>Yeni uygulamalar, iyileştirmeler ve dev güncellemeleri. Buradan hayatında olan her şeyi takip edebilirsin.</p>
+    </div>
+
+    <div class="blog-grid">
+      <article class="blog-card reveal">
+        <div class="blog-date">Temmuz 2026</div>
+        <h3>Animelist: XP Sistemi İyileştirildi</h3>
+        <p>Animeleri izledikçe XP topla, seviyelerini arttır, özel ünvanları açıkla. Gamifikasyon sisteminde büyük iyileştirmeler yaptık.</p>
+        <a href="#" class="blog-link">Devamını oku →</a>
+      </article>
+
+      <article class="blog-card reveal">
+        <div class="blog-date">Temmuz 2026</div>
+        <h3>KalpKalp: Google Play Store'da!</h3>
+        <p>Çiftler için tasarlanmış ilişki uygulaması KalpKalp resmi olarak Google Play Store'da yayında. İndirip dene!</p>
+        <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.kalpkalp" target="_blank" rel="noopener" class="blog-link">Play Store'da Gör →</a>
+      </article>
+
+      <article class="blog-card reveal">
+        <div class="blog-date">Haziran 2026</div>
+        <h3>Yeni Proje: HzAI</h3>
+        <p>Local Gemma 2B powered AI asistanı ile kodlama hızını 10x artırmak. Desktop app ve Android Studio plugin versiyonu yapılıyor.</p>
+        <a href="#" class="blog-link">Devamını oku →</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="newsletter">
+  <div class="wrap">
+    <div class="newsletter-card reveal">
+      <h2>📬 Yeni Uygulamalarımdan Haberdar Ol</h2>
+      <p>Her yeni uygulama yayınlandığında ve önemli güncellemeler geldiğinde e-posta al.</p>
+      <form class="newsletter-form" id="newsletterForm">
+        <input type="email" placeholder="E-posta adresini gir..." required>
+        <button type="submit" class="btn btn-primary">Abone Ol</button>
+      </form>
+      <small>Spam göndermiyoruz, sadece önemli güncellemeler.</small>
+    </div>
+  </div>
+</section>
+
 <section class="contact" id="iletisim">
   <div class="wrap">
     <div class="section-head reveal">
@@ -688,6 +825,33 @@
 </footer>
 
 <script>
+  // Page loader
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('pageLoader');
+    loader.classList.add('hidden');
+  });
+
+  // Theme toggle
+  const themeToggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const savedTheme = localStorage.getItem('theme') || 'dark';
+  
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-mode');
+    themeToggle.textContent = '☀️';
+  }
+  
+  themeToggle.addEventListener('click', () => {
+    document.body.classList.toggle('light-mode');
+    const isLight = document.body.classList.contains('light-mode');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    themeToggle.textContent = isLight ? '☀️' : '🌙';
+  });
+
+  // Update app count dynamically
+  const appCount = document.querySelectorAll('.app-card:not(.add-card)').length;
+  document.getElementById('appCount').textContent = appCount;
+
   document.getElementById('year').textContent = new Date().getFullYear();
 
   const header = document.getElementById('siteHeader');
@@ -720,6 +884,7 @@
   }, { threshold: 0.15 });
   revealEls.forEach(el => io.observe(el));
 
+  // Contact form
   document.getElementById('contactForm').addEventListener('submit', function(e){
     e.preventDefault();
     const name = document.getElementById('cf-name').value;
@@ -729,6 +894,17 @@
     const body = encodeURIComponent('Ad Soyad: ' + name + '\nE-posta: ' + email + '\n\nMesaj:\n' + message);
     const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=hz.yazilimm@gmail.com&su=' + subject + '&body=' + body;
     window.open(gmailUrl, '_blank');
+  });
+
+  // Newsletter form
+  document.getElementById('newsletterForm').addEventListener('submit', function(e){
+    e.preventDefault();
+    const email = this.querySelector('input[type="email"]').value;
+    const subject = encodeURIComponent('Newsletter Abone Olma');
+    const body = encodeURIComponent('E-posta: ' + email + '\n\nHZ Yazılım güncellemelerinden haberdar olmak istiyorum.');
+    const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=hz.yazilimm@gmail.com&su=' + subject + '&body=' + body;
+    window.open(gmailUrl, '_blank');
+    this.reset();
   });
 </script>
 
