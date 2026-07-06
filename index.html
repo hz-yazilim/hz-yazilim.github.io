@@ -66,17 +66,19 @@
     border-bottom:1px solid var(--border);
   }
   header .wrap{display:flex;align-items:center;justify-content:space-between;}
-  .brand{display:flex;align-items:center;gap:12px;}
-  .brand img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(168,85,247,0.35));transition:transform .5s ease, filter .5s ease;animation:logoPulse 4s ease-in-out infinite;}
+  .brand{display:flex;align-items:center;gap:12px;white-space:nowrap;}
+  .brand img{width:38px;height:38px;object-fit:contain;filter:drop-shadow(0 0 10px rgba(168,85,247,0.35));transition:transform .5s ease, filter .5s ease;animation:logoPulse 4s ease-in-out infinite;flex-shrink:0;}
   .brand:hover img{transform:rotate(14deg) scale(1.08);filter:drop-shadow(0 0 18px rgba(168,85,247,0.65));}
   @keyframes logoPulse{0%,100%{filter:drop-shadow(0 0 10px rgba(168,85,247,0.35));}50%{filter:drop-shadow(0 0 16px rgba(168,85,247,0.55));}}
-  .brand span{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:17px;letter-spacing:0.02em;}
-  nav ul{display:flex;gap:36px;list-style:none;align-items:center;}
-  .nav-social{display:flex;gap:20px;align-items:center;margin-left:auto;border-left:1px solid var(--border);padding-left:36px;}
-  .nav-social a{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s ease, transform .2s ease;color:var(--text-muted);}
+  .brand span{font-family:'Space Grotesk',sans-serif;font-weight:600;font-size:clamp(14px,3vw,17px);letter-spacing:0.02em;overflow:hidden;text-overflow:ellipsis;}
+  nav ul{display:flex;gap:clamp(18px,3vw,36px);list-style:none;align-items:center;}
+  .nav-social{display:flex;gap:16px;align-items:center;margin-left:auto;border-left:1px solid var(--border);padding-left:clamp(16px,3vw,36px);}
+  .nav-social a{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .2s ease, transform .2s ease;color:var(--text-muted);flex-shrink:0;}
   .nav-social a:hover{background:rgba(124,58,237,0.15);color:var(--purple-glow);transform:scale(1.1);}
-  .theme-toggle{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--border);cursor:pointer;transition:all .2s ease;background:transparent;color:var(--text-muted);}
+  .theme-toggle{width:32px;height:32px;display:flex;align-items:center;justify-content:center;border-radius:50%;border:1px solid var(--border);cursor:pointer;transition:all .2s ease;background:transparent;color:var(--text-muted);flex-shrink:0;}
   .theme-toggle:hover{border-color:var(--border-bright);background:rgba(124,58,237,0.08);color:var(--purple-glow);}
+  @media(max-width:768px){nav ul{gap:clamp(14px,2vw,20px);}nav a{font-size:13px;}}
+  @media(max-width:640px){.brand span{font-size:13px;}nav ul{gap:10px;}nav a{font-size:12px;}}
   body.light-mode{--bg-void:#f8f6ff;--bg-panel:#f0e8ff;--bg-panel-2:#e8deff;--text-primary:#1a0033;--text-muted:#6b5680;}
   
   .page-loader{position:fixed;inset:0;z-index:999;background:var(--bg-void);display:flex;align-items:center;justify-content:center;opacity:1;visibility:visible;transition:opacity .4s ease, visibility .4s ease;}
@@ -381,6 +383,27 @@
   .blog-link{font-size:13px;color:var(--purple-glow);font-weight:500;text-decoration:none;display:inline-flex;gap:4px;transition:gap .2s ease, opacity .2s ease;}
   .blog-link:hover{gap:8px;}
   .blog-link[aria-disabled="true"]{opacity:0.5;cursor:not-allowed;pointer-events:none;}
+
+  /* ---------- collaboration section ---------- */
+  .collab-section{padding:100px 0;position:relative;overflow:hidden;}
+  .collab-section::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 50%, rgba(168,85,247,0.08), transparent 50%);pointer-events:none;}
+  .collab-content{position:relative;z-index:1;text-align:center;max-width:800px;margin:0 auto;animation:fadeUp .8s cubic-bezier(.22,1,.36,1) forwards;opacity:0;animation-delay:.2s;}
+  .collab-content h2{font-size:clamp(36px,6vw,56px);margin-bottom:20px;line-height:1.2;background:linear-gradient(90deg,var(--text-primary),var(--purple-glow));-webkit-background-clip:text;background-clip:text;color:transparent;}
+  .collab-content p{font-size:18px;color:var(--text-muted);margin-bottom:40px;line-height:1.8;}
+  .collab-cta{display:flex;justify-content:center;gap:20px;flex-wrap:wrap;}
+  .collab-cta .btn{padding:16px 32px;font-size:15px;min-width:160px;}
+  @media(max-width:768px){
+    .collab-section{padding:80px 0;}
+    .collab-content h2{font-size:32px;}
+    .collab-content p{font-size:16px;margin-bottom:32px;}
+  }
+  @media(max-width:640px){
+    .collab-section{padding:60px 0;}
+    .collab-content h2{font-size:24px;}
+    .collab-content p{font-size:15px;margin-bottom:28px;}
+    .collab-cta{gap:12px;}
+    .collab-cta .btn{padding:14px 24px;font-size:13px;flex:1;min-width:140px;}
+  }
 
   /* ---------- newsletter ---------- */
   .newsletter{padding:100px 0;}
@@ -782,11 +805,24 @@
   </div>
 </section>
 
+<section class="collab-section reveal">
+  <div class="wrap">
+    <div class="collab-content">
+      <h2>Birlikte Başarabilir Miyiz?</h2>
+      <p>Harika bir proje üzerinde çalışıyor musun? Ya da biz birlikte başarılı çözümler oluşturabiliriz  Yeni fikirler, iş birliği teklifleri ve projeler için her zaman açığız. Gelin konuşalım ve birlikte nasıl ileri gidebileceğimizi görelim.</p>
+      <div class="collab-cta">
+        <a href="mailto:hz.yazilimm@gmail.com" class="btn btn-primary">📧 E-posta Gönder</a>
+        <a href="https://github.com/hz-yazilim" target="_blank" rel="noopener" class="btn btn-ghost">⭐ GitHub Profili</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section class="newsletter">
   <div class="wrap">
     <div class="newsletter-card reveal">
       <h2>📬 Yeni Uygulamalarımdan Haberdar Ol</h2>
-      <p>Her yeni uygulama yayınlandığında ve önemli güncellemeler geldiğinde e-posta al.</p>
+      <p>Her yeni uygulama yayınlandığında ve önemli güncellemeler geldiğinde e-posta al veya  instangram hesabımızı takip edebilirisniz hzyazilim.official</p>
       <form class="newsletter-form" id="newsletterForm">
         <input type="email" placeholder="E-posta adresini gir..." required>
         <button type="submit" class="btn btn-primary">Abone Ol</button>
