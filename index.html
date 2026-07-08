@@ -621,10 +621,7 @@
           <div class="card-actions">
             <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.kalpkalp" target="_blank" rel="noopener">Google Play →</a>
             <a href="gizlilik-kalpkalp.html" target="_blank" rel="noopener">Gizlilik →</a>
-          </div>
-          <div class="gallery-section" id="kalpkalp-gallery">
-            <div class="gallery-title">📸 Ekran Görüntüleri</div>
-            <div class="gallery-grid" id="kalpkalp-grid"></div>
+            <a href="#" onclick="showGallery('kalpkalp'); return false;">📸 Galeri →</a>
           </div>
         </div>
       </div>
@@ -677,10 +674,7 @@
           <div class="card-actions">
             <a href="https://play.google.com/store/apps/details?id=com.hzyazilim.animelist" target="_blank" rel="noopener">Google Play →</a>
             <a href="gizlilik-animelist.html" target="_blank" rel="noopener">Gizlilik →</a>
-          </div>
-          <div class="gallery-section" id="animelist-gallery">
-            <div class="gallery-title">📸 Ekran Görüntüleri</div>
-            <div class="gallery-grid" id="animelist-grid"></div>
+            <a href="#" onclick="showGallery('animelist'); return false;">📸 Galeri →</a>
           </div>
         </div>
       </div>
@@ -926,17 +920,22 @@
 
 <!-- Image Modal -->
 <div class="modal" id="imageModal">
+  <div class="modal-content"></div>
+</div>
+
+<!-- Full Image Modal -->
+<div class="modal" id="fullImageModal" style="background: rgba(0,0,0,0.95);">
   <div class="modal-content">
-    <button class="modal-close" onclick="closeModal()">&times;</button>
-    <img id="modalImage" src="" alt="Fullscreen image">
+    <button class="modal-close" onclick="document.getElementById('fullImageModal').classList.remove('active'); document.body.style.overflow = 'auto';">&times;</button>
+    <img id="fullImage" src="" alt="Fullscreen image" style="max-width: 90vw; max-height: 90vh; border-radius: 12px;">
   </div>
 </div>
 
 <script>
   // Image gallery paths
   const galleryImages = {
-    kalpkalp: ['38_1x_shots_so.png', '39_1x_shots_so.png', '122_1x_shots_so.png', '225_1x_shots_so.png', '423_1x_shots_so.png', '491_1x_shots_so.png', '492_1x_shots_so.png', '495_1x_shots_so.png', '523_1x_shots_so.png', '631_1x_shots_so.png'],
-    animelist: ['57shots_so.png', '192_1x_shots_so.png', '202shots_so.png', '297_1x_shots_so.png', '444shots_so.png', '927shots_so.png']
+    kalpkalp: ['38_shots_so.png', '39_shots_so.png', '122_shots_so.png', '225_shots_so.png', '423_shots_so.png', '491_shots_so.png', '492_shots_so.png', '495_shots_so.png', '523_shots_so.png', '631_shots_so.png'],
+    animelist: ['57shots_so.png', '192_shots_so.png', '202shots_so.png', '297_shots_so.png', '444shots_so.png', '927shots_so.png']
   };
 
   // Load gallery images
@@ -954,11 +953,35 @@
     });
   }
 
-  // Modal functions
-  function openModal(imageSrc) {
+  // Gallery modal functions
+  function showGallery(appName) {
     const modal = document.getElementById('imageModal');
-    const modalImg = document.getElementById('modalImage');
-    modalImg.src = imageSrc;
+    const container = modal.querySelector('.modal-content');
+    
+    if (!galleryImages[appName]) return;
+    
+    // Clear previous content
+    container.innerHTML = '<button class="modal-close" onclick="closeModal()">&times;</button>';
+    
+    const galleryDiv = document.createElement('div');
+    galleryDiv.style.cssText = 'display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 12px; padding: 20px;';
+    
+    galleryImages[appName].forEach(img => {
+      const imgDiv = document.createElement('img');
+      imgDiv.src = `assets/${appName}/${img}`;
+      imgDiv.style.cssText = 'width: 100%; height: auto; border-radius: 8px; cursor: pointer; transition: transform .2s ease;';
+      imgDiv.onclick = () => {
+        const fullModal = document.getElementById('fullImageModal');
+        const fullImg = document.getElementById('fullImage');
+        fullImg.src = `assets/${appName}/${img}`;
+        fullModal.classList.add('active');
+      };
+      imgDiv.onmouseover = function() { this.style.transform = 'scale(1.05)'; };
+      imgDiv.onmouseout = function() { this.style.transform = 'scale(1)'; };
+      galleryDiv.appendChild(imgDiv);
+    });
+    
+    container.appendChild(galleryDiv);
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -983,10 +1006,6 @@
   window.addEventListener('load', () => {
     const loader = document.getElementById('pageLoader');
     loader.classList.add('hidden');
-    
-    // Load galleries after page loads
-    loadGallery('kalpkalp', 'kalpkalp-grid');
-    loadGallery('animelist', 'animelist-grid');
   });
 
   // Theme toggle

@@ -1,0 +1,20 @@
+HZ YAZILIM WEBSITE
+
+Dosya Yapısı:
+- index.html         → Ana sayfa
+- assets/            → Ekran görüntüleri (KalpKalp, AnimeList)
+- gizlilik-*.html    → Gizlilik sayfaları (her uygulama için)
+- logo.png           → Logo
+- *-mockup.png       → App mockup resimleri
+
+Çalıştırma:
+1. Terminal'de bu klasöre gir
+2. Python: python3 -m http.server 8000
+   veya Node: npx http-server
+3. Browser'da: http://localhost:8000
+
+Özellikler:
+✓ Modal galeri - resimlere tıkla, tam ekran gözüksün
+✓ Gizlilik & Play Store butonları her uygulamada
+✓ Dark/Light mode
+✓ Responsive tasarım
